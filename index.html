@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="./index.css">
+    <title>Library</title>
+</head>
+<body>
+    <header>
+        <h1>Library</h1>
+    </header>
+    <main>
+        <section style="text-align:center;">
+            <button id="addrecord">Add book</button>
+        </section>
+        <section id="modal">
+            <div>
+                <label>Name of Book:</label>
+                <input type="text" id="title" >
+            </div>
+            <div>
+                <label>Author of Book</label>
+                <input type="text" id="author">
+            </div>
+            <div> 
+                <label>Number of pages</label>
+                <input type="number" id="pages">
+            </div>
+            <div>
+                <label>Reading Status:</label>
+                <input type="radio" id="status">
+            </div>
+            <div>
+                <button id="createrecord">Submit</button>
+            </div>
+        </section>
+        <section id="books">
+            
+        </section>
+
+    </main>
+    <script src="./index.js"></script>
+</body>
+</html>

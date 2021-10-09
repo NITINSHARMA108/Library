@@ -1,0 +1,79 @@
+body{
+    margin:0px;
+    
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+}
+main{
+    width:100%;
+}
+
+#modal{
+    display:none;
+    width:20%;
+    background-color:white;
+    border-radius:10px;
+    margin:auto;
+    padding:2%;
+    
+    border:5px solid black;
+    overflow:hidden;
+    
+
+}
+label{
+    text-align:center;
+}
+input{
+    width:90%;
+    
+}
+.parent{
+    display:flex;
+    width:100%;
+    justify-content: space-between;
+
+}
+
+.child{
+    width:20%;
+
+}
+
+button{
+    background-color:#0275d8;
+    border-radius:10px;
+    color:white;
+    border:1px solid white;
+    padding:10px;
+    font-size:1.3em;
+
+}
+
+.card{
+    width:30%;
+    background-color:aqua;
+    border:2px solid black;
+    border-radius:5px;
+    display:inline;
+    float:left;
+    margin:10px;
+    text-align:center;
+    font-size:1.2em;
+    
+}
+i{
+    margin:10px;
+}
+
+@media screen and (max-width:768px){
+    #modal{
+        width:50%;
+    }
+    .card{
+        width:60%;
+        margin-left:20%;
+        margin-right:20%;
+    }
+}
