@@ -15,11 +15,16 @@ if(localStorage.getItem('records')!=null)
     library=JSON.parse(localStorage.getItem('records'));
 }
 
+//close modal
+document.getElementById('times').addEventListener('click',function(){
+    document.getElementById('modal').style.display='none';
+})
+
 displayform.addEventListener('click',function(){
     console.log(displayform);
     if(document.getElementById('modal').style.display=='block')
     {
-        document.getElementById('modal').style.display='none'
+        document.getElementById('modal').style.display='none';
     }
     else{
     document.getElementById('modal').style.display='block';
@@ -31,6 +36,11 @@ createrecord.addEventListener('click',function(){
     let title=document.getElementById('title').value;
     let author=document.getElementById('author').value;
     let pages=document.getElementById('pages').value;
+    if(title=='' || author=='' || pages==0)
+    {
+        window.alert('incomplete information');
+        return ;
+    }
     let status=readstatus;
     readstatus='false';
     let newbook=new books(title,author,pages,status);
@@ -71,29 +81,69 @@ function displayLibrary(){
         divparent.setAttribute('class','card');
         for(key in book)
         {
-            let divchild=document.createElement('div');
-            let text=document.createTextNode(`${key.toUpperCase()} : ${(book[key]).toLowerCase()}`);
-            divchild.appendChild(text);
-            divparent.append(divchild);
+            if(key=='title')
+            {
+                let divchild=document.createElement('h2');
+                let text=document.createTextNode(`${book[key]}`);
+                divchild.setAttribute('class','title');
+                divchild.appendChild(text); 
+                divparent.append(divchild);
+            }
+            else
+            {
+                let divchild=document.createElement('div');
+                if(key=='status')
+                {
+                    if(book[key]=='true')
+                    {
+                        let text=document.createTextNode(`${key.toUpperCase()} : Read`);
+                        divchild.appendChild(text);
+                    }
+                    else{
+                        let text=document.createTextNode(`${key.toUpperCase()} : Not Read`);
+                        divchild.appendChild(text);
+                    }
+                }
+                else{
+                let text=document.createTextNode(`${key.toUpperCase()} : ${(book[key]).toLowerCase()}`);
+                divchild.appendChild(text);
+                }
+                divparent.append(divchild);
+            }
+            
         }
-        let delet=document.createElement('i');
-        let edit=document.createElement('i');
-        delet.setAttribute('class',`fas fa-trash`);
-        delet.setAttribute('id',`${book.title}`);
+        let delet=document.createElement('button');
+        let textnode1=document.createTextNode('Delete');
+        delet.appendChild(textnode1);
+        
+        let edit=document.createElement('button');
+        if(book.status=='true')
+        {
+            let textnode2=document.createTextNode('Unread');
+            edit.appendChild(textnode2);
+        }
+        else{
+            let textnode2=document.createTextNode('Read');
+            edit.appendChild(textnode2); 
+        }
+        
+        delet.setAttribute('data',`${book.title}`);
         
                 delet.addEventListener('click',function(){
                 
-                let title=this.id;
+                let title=this.getAttribute('data');
                 library=library.filter((b)=>b.title!=title);
                 localStorage.removeItem('records');
                 localStorage.setItem('records',JSON.stringify(library));
                 displayLibrary();
                 })
-        edit.setAttribute('class','fas fa-edit');
-        edit.setAttribute('id',`${book.name}_`);
+        //edit.setAttribute('class','fas fa-edit');
+        //console.log(book.name);
+        edit.setAttribute('data',`${book.title}_`);
                 edit.addEventListener('click',function(){
-                        
-                    let title=this.id;
+                        console.log(this)
+                    let title=this.getAttribute('data');
+                    console.log(title)
                     library=library.map((b)=>{
                         if((b.title+'_')==title)
                         {
@@ -111,9 +161,10 @@ function displayLibrary(){
                     localStorage.setItem('records',JSON.stringify(library));
                     displayLibrary();
                     })
+        divparent.append(edit);
         divparent.append(delet);
 
-        divparent.append(edit);
+        
 
 
         document.getElementById('books').append(divparent);
