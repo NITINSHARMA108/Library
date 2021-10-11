@@ -45,6 +45,10 @@ createrecord.addEventListener('click',function(){
     readstatus='false';
     let newbook=new books(title,author,pages,status);
     addbook(title,author,pages,status);
+    document.getElementById('title').value="";
+    document.getElementById('author').value="";
+    document.getElementById('pages').value="";
+    document.querySelector("input[type='radio'][name='status']").checked=false;
     
     document.getElementById('modal').style.display='none';
     displayLibrary();
